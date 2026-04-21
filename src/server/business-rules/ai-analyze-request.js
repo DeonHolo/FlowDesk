@@ -1,4 +1,4 @@
-import { gs, sn_ws } from '@servicenow/glide'
+import { gs } from '@servicenow/glide'
 
 /**
  * AI Analyze New Request — Business Rule Script (Module)
@@ -64,18 +64,14 @@ export function aiAnalyzeNewRequest(current, previous) {
 
         gs.info('FlowDeskAI: Calling Gemini API...')
 
-        // Destructure RESTMessageV2 from the sn_ws namespace at runtime
-        // to avoid "sealed object" errors from direct property access
-        var RestMsg = sn_ws.RESTMessageV2
-        var restMessage = new RestMsg()
-        restMessage.setEndpoint(
+        // Use GlideHTTPRequest instead of sn_ws.RESTMessageV2
+        // because the module bundler seals imported sn_ws, breaking `new`
+        var restMessage = new GlideHTTPRequest(
             'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + apiKey
         )
-        restMessage.setHttpMethod('POST')
-        restMessage.setRequestHeader('Content-Type', 'application/json')
-        restMessage.setRequestBody(requestBody)
+        restMessage.addHeader('Content-Type', 'application/json')
+        var response = restMessage.post(requestBody)
 
-        var response = restMessage.execute()
         var httpStatus = response.getStatusCode()
         var responseBody = response.getBody()
 
