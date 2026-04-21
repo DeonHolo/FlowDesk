@@ -9,9 +9,37 @@ declare global {
                         table: 'sys_scope_privilege'
                         id: '1cd5c84f0f50075032c14bc530d1b234'
                     }
+                    '26abc84b0f90075032c14bc530d1b259': {
+                        table: 'sys_scope_privilege'
+                        id: '26abc84b0f90075032c14bc530d1b259'
+                    }
+                    '66abc84b0f90075032c14bc530d1b25d': {
+                        table: 'sys_scope_privilege'
+                        id: '66abc84b0f90075032c14bc530d1b25d'
+                    }
                     '69473bfa0fdcc35032c14bc530d1b214': {
                         table: 'sys_scope_privilege'
                         id: '69473bfa0fdcc35032c14bc530d1b214'
+                    }
+                    '76abc84b0f90075032c14bc530d1b276': {
+                        table: 'sys_scope_privilege'
+                        id: '76abc84b0f90075032c14bc530d1b276'
+                    }
+                    '7eabc84b0f90075032c14bc530d1b286': {
+                        table: 'sys_scope_privilege'
+                        id: '7eabc84b0f90075032c14bc530d1b286'
+                    }
+                    a6abc84b0f90075032c14bc530d1b261: {
+                        table: 'sys_scope_privilege'
+                        id: 'a6abc84b0f90075032c14bc530d1b261'
+                    }
+                    aeab480b0f90075032c14bc530d1b258: {
+                        table: 'sys_scope_privilege'
+                        id: 'aeab480b0f90075032c14bc530d1b258'
+                    }
+                    aeabc84b0f90075032c14bc530d1b271: {
+                        table: 'sys_scope_privilege'
+                        id: 'aeabc84b0f90075032c14bc530d1b271'
                     }
                     'ai-analyze-request': {
                         table: 'sys_script'
