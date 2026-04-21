@@ -25,7 +25,15 @@ export function aiAnalyzeNewRequest(current, previous) {
         }
 
         // Use a safe lookup for the Script Include to avoid raw ReferenceError crashing the script
-        var FlowDeskAIGlobal = (typeof FlowDeskAI !== 'undefined') ? FlowDeskAI : (typeof global !== 'undefined' ? global.FlowDeskAI : null);
+        var FlowDeskAIGlobal = null;
+        try {
+            if (typeof x_1978345_flowdesk !== 'undefined' && x_1978345_flowdesk.FlowDeskAI) {
+                FlowDeskAIGlobal = x_1978345_flowdesk.FlowDeskAI;
+            } else if (typeof FlowDeskAI !== 'undefined') {
+                FlowDeskAIGlobal = FlowDeskAI;
+            }
+        } catch (err) {}
+        
         if (!FlowDeskAIGlobal) {
             gs.error('FlowDeskAI: Could not locate FlowDeskAI Script Include in scope!');
             return;
