@@ -15,7 +15,7 @@ BusinessRule({
     $id: Now.ID['ai-analyze-request'],
     name: 'AI Analyze New Request',
     table: 'x_1978345_flowdesk_request',
-    when: 'after',
+    when: 'async',
     action: ['insert', 'update'],
     active: true,
     order: 200,
