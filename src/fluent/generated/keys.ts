@@ -5,6 +5,10 @@ declare global {
         namespace Internal {
             interface Keys extends KeysRegistry {
                 explicit: {
+                    '69473bfa0fdcc35032c14bc530d1b214': {
+                        table: 'sys_scope_privilege'
+                        id: '69473bfa0fdcc35032c14bc530d1b214'
+                    }
                     'ai-analyze-request': {
                         table: 'sys_script'
                         id: '92f0ac3705ce4d6f880938bf52cad5f4'
@@ -12,6 +16,10 @@ declare global {
                     bom_json: {
                         table: 'sys_module'
                         id: 'cf6b7c8305da4774bf1e90fc996579ab'
+                    }
+                    fda673ba0fdcc35032c14bc530d1b28b: {
+                        table: 'sys_properties'
+                        id: 'fda673ba0fdcc35032c14bc530d1b28b'
                     }
                     FlowDeskAI: {
                         table: 'sys_script_include'
