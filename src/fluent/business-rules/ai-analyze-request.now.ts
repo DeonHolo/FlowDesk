@@ -13,7 +13,8 @@ BusinessRule({
     name: 'AI Analyze New Request',
     table: 'x_1978345_flowdesk_request',
     when: 'after',
-    action: ['insert'],
+    insert: true,
+    update: true,
     active: true,
     order: 200,
     description:
