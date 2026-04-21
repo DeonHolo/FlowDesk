@@ -1,26 +1,28 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { IncidentService } from './services/IncidentService'
-import IncidentList from './components/IncidentList'
-import IncidentForm from './components/IncidentForm'
+import { RequestService } from './services/RequestService'
+import RequestList from './components/RequestList'
+import RequestForm from './components/RequestForm'
+import AiPanel from './components/AiPanel'
 import './app.css'
 
 export default function App() {
-    const [incidents, setIncidents] = useState([])
+    const [requests, setRequests] = useState([])
     const [loading, setLoading] = useState(true)
     const [showForm, setShowForm] = useState(false)
-    const [selectedIncident, setSelectedIncident] = useState(null)
+    const [selectedRequest, setSelectedRequest] = useState(null)
+    const [aiPanelRequest, setAiPanelRequest] = useState(null)
     const [error, setError] = useState(null)
 
-    const incidentService = useMemo(() => new IncidentService(), [])
+    const requestService = useMemo(() => new RequestService(), [])
 
-    const refreshIncidents = async () => {
+    const refreshRequests = async () => {
         try {
             setLoading(true)
             setError(null)
-            const data = await incidentService.list()
-            setIncidents(data)
+            const data = await requestService.list()
+            setRequests(data)
         } catch (err) {
-            setError('Failed to load incidents: ' + (err.message || 'Unknown error'))
+            setError('Failed to load requests: ' + (err.message || 'Unknown error'))
             console.error(err)
         } finally {
             setLoading(false)
@@ -28,40 +30,44 @@ export default function App() {
     }
 
     useEffect(() => {
-        void refreshIncidents()
+        void refreshRequests()
     }, [])
 
     const handleCreateClick = () => {
-        setSelectedIncident(null)
+        setSelectedRequest(null)
         setShowForm(true)
     }
 
-    const handleEditClick = (incident) => {
-        setSelectedIncident(incident)
+    const handleEditClick = (request) => {
+        setSelectedRequest(request)
         setShowForm(true)
+    }
+
+    const handleAiClick = (request) => {
+        setAiPanelRequest(request)
     }
 
     const handleFormClose = () => {
         setShowForm(false)
-        setSelectedIncident(null)
+        setSelectedRequest(null)
     }
 
     const handleFormSubmit = async (formData) => {
         setLoading(true)
         try {
-            if (selectedIncident) {
+            if (selectedRequest) {
                 const sysId =
-                    typeof selectedIncident.sys_id === 'object'
-                        ? selectedIncident.sys_id.value
-                        : selectedIncident.sys_id
-                await incidentService.update(sysId, formData)
+                    typeof selectedRequest.sys_id === 'object'
+                        ? selectedRequest.sys_id.value
+                        : selectedRequest.sys_id
+                await requestService.update(sysId, formData)
             } else {
-                await incidentService.create(formData)
+                await requestService.create(formData)
             }
             setShowForm(false)
-            await refreshIncidents()
+            await refreshRequests()
         } catch (err) {
-            setError('Failed to save incident: ' + (err.message || 'Unknown error'))
+            setError('Failed to save request: ' + (err.message || 'Unknown error'))
             console.error(err)
         } finally {
             setLoading(false)
@@ -69,11 +75,15 @@ export default function App() {
     }
 
     return (
-        <div className="incident-app">
+        <div className="flowdesk-app">
             <header className="app-header">
-                <h1>Incident Response Manager</h1>
+                <div className="header-brand">
+                    <span className="brand-icon">⚡</span>
+                    <h1>FlowDesk</h1>
+                    <span className="brand-subtitle">Startup Helpdesk & Ops Hub</span>
+                </div>
                 <button className="create-button" onClick={handleCreateClick}>
-                    Create New Incident
+                    + New Request
                 </button>
             </header>
 
@@ -84,19 +94,39 @@ export default function App() {
                 </div>
             )}
 
-            {loading ? (
-                <div className="loading">Loading...</div>
-            ) : (
-                <IncidentList
-                    incidents={incidents}
-                    onEdit={handleEditClick}
-                    onRefresh={refreshIncidents}
-                    service={incidentService}
-                />
-            )}
+            <div className="app-content">
+                <div className={`list-section ${aiPanelRequest ? 'with-panel' : ''}`}>
+                    {loading ? (
+                        <div className="loading">Loading requests...</div>
+                    ) : (
+                        <RequestList
+                            requests={requests}
+                            onEdit={handleEditClick}
+                            onRefresh={refreshRequests}
+                            onAiClick={handleAiClick}
+                            service={requestService}
+                            activeAiId={
+                                aiPanelRequest
+                                    ? typeof aiPanelRequest.sys_id === 'object'
+                                        ? aiPanelRequest.sys_id.value
+                                        : aiPanelRequest.sys_id
+                                    : null
+                            }
+                        />
+                    )}
+                </div>
+
+                {aiPanelRequest && (
+                    <AiPanel request={aiPanelRequest} onClose={() => setAiPanelRequest(null)} />
+                )}
+            </div>
 
             {showForm && (
-                <IncidentForm incident={selectedIncident} onSubmit={handleFormSubmit} onCancel={handleFormClose} />
+                <RequestForm
+                    request={selectedRequest}
+                    onSubmit={handleFormSubmit}
+                    onCancel={handleFormClose}
+                />
             )}
         </div>
     )

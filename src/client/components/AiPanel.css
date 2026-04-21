@@ -1,0 +1,167 @@
+.ai-panel {
+    width: 360px;
+    flex-shrink: 0;
+    background: white;
+    border: 1px solid #e0e7ff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(79, 70, 229, 0.08);
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+.ai-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 18px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+}
+
+.ai-panel-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ai-panel-icon {
+    font-size: 24px;
+}
+
+.ai-panel-title h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.ai-panel-number {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.ai-panel-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+}
+
+.ai-panel-close:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.ai-panel-body {
+    padding: 16px 18px;
+}
+
+.ai-section {
+    margin-bottom: 18px;
+}
+
+.ai-section h4 {
+    margin: 0 0 8px 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4338ca;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.ai-summary-text {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #374151;
+    background: #f8f8fc;
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 3px solid #4f46e5;
+}
+
+.ai-chips {
+    display: flex;
+    gap: 12px;
+}
+
+.ai-chip {
+    flex: 1;
+    background: #f8f8fc;
+    padding: 10px 12px;
+    border-radius: 8px;
+}
+
+.ai-chip h4 {
+    margin-bottom: 6px;
+}
+
+.ai-dept-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.ai-dept-badge.dept-it { background: #dbeafe; color: #1d4ed8; }
+.ai-dept-badge.dept-hr { background: #fce7f3; color: #be185d; }
+.ai-dept-badge.dept-facilities { background: #d1fae5; color: #047857; }
+
+.ai-priority-text {
+    margin: 0;
+    font-size: 13px;
+    color: #374151;
+    line-height: 1.5;
+}
+
+.ai-checklist, .ai-questions {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ai-checklist li {
+    padding: 8px 10px;
+    font-size: 13px;
+    color: #374151;
+    background: #f0fdf4;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    border-left: 3px solid #22c55e;
+    line-height: 1.4;
+}
+
+.ai-questions li {
+    padding: 8px 10px;
+    font-size: 13px;
+    color: #374151;
+    background: #fffbeb;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    border-left: 3px solid #f59e0b;
+    line-height: 1.4;
+}
+
+.ai-empty {
+    text-align: center;
+    padding: 24px;
+    color: #6b7280;
+}
+
+.ai-empty p {
+    margin: 4px 0;
+}
+
+.ai-empty-hint {
+    font-size: 12px;
+    opacity: 0.7;
+}
