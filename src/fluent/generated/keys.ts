@@ -5,6 +5,10 @@ declare global {
         namespace Internal {
             interface Keys extends KeysRegistry {
                 explicit: {
+                    '1cd5c84f0f50075032c14bc530d1b234': {
+                        table: 'sys_scope_privilege'
+                        id: '1cd5c84f0f50075032c14bc530d1b234'
+                    }
                     '69473bfa0fdcc35032c14bc530d1b214': {
                         table: 'sys_scope_privilege'
                         id: '69473bfa0fdcc35032c14bc530d1b214'
