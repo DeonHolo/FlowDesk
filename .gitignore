@@ -5,4 +5,4 @@ node_modules/
 target/
 *.tsbuildinfo
 .jest_cache
-src/fluent/generated/properties/system-property/*.ts
+src\fluent\generated\properties\system-property\sys_properties_fda673ba0fdcc35032c14bc530d1b28b.now.ts
