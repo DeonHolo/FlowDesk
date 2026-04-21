@@ -79,10 +79,11 @@ BusinessRule({
         // sn_ws.RESTMessageV2 works here because this is a classic inline script,
         // NOT a module — so sn_ws is available as a normal runtime global.
         var restMessage = new sn_ws.RESTMessageV2();
-        restMessage.setEndpoint('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + apiKey);
+        restMessage.setEndpoint('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=' + apiKey);
         restMessage.setHttpMethod('POST');
         restMessage.setRequestHeader('Content-Type', 'application/json');
         restMessage.setRequestBody(requestBody);
+        restMessage.setHttpTimeout(60000);
 
         var response = restMessage.execute();
         var httpStatus = response.getStatusCode();
