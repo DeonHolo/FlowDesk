@@ -64,6 +64,7 @@ declare global {
                     fda673ba0fdcc35032c14bc530d1b28b: {
                         table: 'sys_properties'
                         id: 'fda673ba0fdcc35032c14bc530d1b28b'
+                        deleted: true
                     }
                     FlowDeskAI: {
                         table: 'sys_script_include'
