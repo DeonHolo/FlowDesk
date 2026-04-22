@@ -10,6 +10,7 @@ export default function RequestForm({ request, onSubmit, onCancel }) {
         u_department: 'it',
         u_request_category: '',
         priority: '3',
+        state: '1',
     })
 
     useEffect(() => {
@@ -24,6 +25,7 @@ export default function RequestForm({ request, onSubmit, onCancel }) {
                 u_department: getValue(request.u_department) || 'it',
                 u_request_category: getValue(request.u_request_category),
                 priority: getValue(request.priority) || '3',
+                state: getValue(request.state) || '1',
             })
         }
     }, [request])
@@ -92,6 +94,17 @@ export default function RequestForm({ request, onSubmit, onCancel }) {
                                 <option value="2">2 - High</option>
                                 <option value="3">3 - Medium</option>
                                 <option value="4">4 - Low</option>
+                            </select>
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="state">State</label>
+                            <select id="state" name="state" value={formData.state} onChange={handleChange}>
+                                <option value="1">New</option>
+                                <option value="2">In Progress</option>
+                                <option value="3">On Hold</option>
+                                <option value="6">Resolved</option>
+                                <option value="7">Closed</option>
                             </select>
                         </div>
                     </div>
