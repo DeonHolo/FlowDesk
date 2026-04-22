@@ -64,7 +64,7 @@ declare global {
                     fda673ba0fdcc35032c14bc530d1b28b: {
                         table: 'sys_properties'
                         id: 'fda673ba0fdcc35032c14bc530d1b28b'
-                        deleted: false
+                        deleted: true
                     }
                     'flowdesk-request-create': {
                         table: 'sys_security_acl'
