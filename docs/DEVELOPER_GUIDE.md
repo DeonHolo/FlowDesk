@@ -17,6 +17,7 @@
 6. [Verification & Testing](#6-verification--testing)
 7. [Key ServiceNow Concepts](#7-key-servicenow-concepts)
 8. [Troubleshooting](#8-troubleshooting)
+9. [Secrets Management & SDK Quirks](#9-secrets-management--sdk-quirks)
 
 ---
 
@@ -492,6 +493,32 @@ searchParams.set('sysparm_fields',
 | Script Includes | `/sys_script_include_list.do` |
 | REST Messages | `/sys_rest_message_list.do` |
 | Your UI Page | `/x_1978345_flowdesk_incident_manager.do` |
+
+## 9. Secrets Management & SDK Quirks
+
+When using the `now-sdk`, pulling from your instance (`npm run fetch` or `npm run pull`) will automatically download System Properties into `src/fluent/generated/properties/system-property/`.
+
+**The Danger:**
+If you store API keys (like the Gemini API Key) in a System Property, the SDK will download the actual secret value into a `.now.ts` file. If you commit this file to GitHub, your API key will be leaked and immediately revoked by Google.
+
+**The Solution:**
+We have added the following rule to `.gitignore`:
+```text
+src/fluent/generated/properties/system-property/*.ts
+```
+This ensures Git ignores any system properties downloaded by the SDK.
+
+**Workflow for Secrets:**
+1. Leave the `value` empty in your local code.
+2. Deploy the app (`npm run deploy`), which will clear the key in the PDI.
+3. Manually log into your PDI.
+4. Navigate to `sys_properties.list`.
+5. Find `x_1978345_flowdesk.gemini_api_key` and paste your actual API key there.
+
+**Cross-Scope Privileges:**
+When a scoped app (like FlowDesk) calls a global API like `sn_ws.RESTMessageV2`, ServiceNow generates a **Cross-Scope Privilege** record (`sys_scope_privilege_*.xml`).
+- **DO NOT ignore these files.**
+- You **must** commit them to GitHub. They act as "permission slips" allowing your app to make HTTP requests when installed on a fresh instance.
 
 ---
 
